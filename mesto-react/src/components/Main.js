@@ -1,6 +1,21 @@
 import React from 'react';
 
 function Main() {
+  
+  const handleEditAvatarClick = () => {
+    document.querySelector('.popup_avatar').classList.add('popup_opened');
+  };
+  const handleEditProfileClick = () => {
+    document.querySelector('.popup_user').classList.add('popup_opened');
+  };
+  const handleAddPlaceClick = () => {
+    document.querySelector('.popup_card').classList.add('popup_opened');
+  };
+  
+  document.querySelector('.profile__button-avatar').addEventListener('click', handleEditAvatarClick);
+  document.querySelector('.profile__button-edit').addEventListener('click', handleEditProfileClick);
+  document.querySelector('.profile__button-add').addEventListener('click', handleAddPlaceClick);
+  
   return (
     <main>
       <section className="profile">
@@ -18,7 +33,7 @@ function Main() {
       </section>
       <section className="elements">
         <ul className="elements__list"></ul>
-      </section> 
+      </section>
     </main>
   )
 };
