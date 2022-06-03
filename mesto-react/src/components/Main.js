@@ -12,24 +12,20 @@ function Main() {
     document.querySelector('.popup_card').classList.add('popup_opened');
   };
   
-  document.querySelector('.profile__button-avatar').addEventListener('click', handleEditAvatarClick);
-  document.querySelector('.profile__button-edit').addEventListener('click', handleEditProfileClick);
-  document.querySelector('.profile__button-add').addEventListener('click', handleAddPlaceClick);
-  
   return (
     <main>
       <section className="profile">
-        <button className="profile__button-avatar">
+        <button className="profile__button-avatar" type="button" onClick={handleEditAvatarClick}>
           <img className="profile__avatar-img"/>
         </button>
         <div className="profile__info">
           <div className="profile__author">
             <h1 className="profile__name"></h1>
-            <button className="profile__button-edit" type="button"></button>
+            <button className="profile__button-edit" type="button" onClick={handleEditProfileClick}></button>
           </div>
           <p className="profile__text"></p>
         </div>
-        <button className="profile__button-add" type="button"></button>
+        <button className="profile__button-add" type="button" onClick={handleAddPlaceClick}></button>
       </section>
       <section className="elements">
         <ul className="elements__list"></ul>
