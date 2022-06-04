@@ -28,8 +28,6 @@ function App() {
     setIsPlacePopup(false);
   }
     
-
-
   return (
     <body className="page">
       <div className="content">
