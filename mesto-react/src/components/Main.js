@@ -1,19 +1,29 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { api } from '../utils/Api.js';
+import Card from './Card.js';
 
 function Main(props) {
-  const [userAvatar, setUserAvatar] = React.useState();
-  const [userName, setUserName] = React.useState();
-  const [userDescription , setUserDescription] = React.useState();
-  const [cards, setCards] = React.useState([]);
+  const [userAvatar, setUserAvatar] = useState();
+  const [userName, setUserName] = useState();
+  const [userDescription , setUserDescription] = useState();
+  const [cards, setCards] = useState([]);
 
-  Promise.all([api.getUser(), api.getCards()])
-  .then(([userInfo, cards]) => {
-    setUserAvatar(userInfo.avatar);
-    setUserName(userInfo.name);
-    setUserDescription(userInfo.about);
-  })
-  .catch(err => console.log(err));
+  useEffect(() => {
+    Promise.all([api.getUser(), api.getCards()])
+      .then(([userInfo, items]) => {
+        setUserAvatar(userInfo.avatar);
+        setUserName(userInfo.name);
+        setUserDescription(userInfo.about);
+
+        setCards(items.map(item => ({
+          name: item.name,
+          link: item.link,
+          likes: item.likes.length,
+          key: item._id,
+        })))
+      })
+      .catch(err => console.log(err));
+  }, [])
 
   return (
     <main>
@@ -31,7 +41,9 @@ function Main(props) {
         <button className="profile__button-add" type="button" onClick={props.onAddPlace}></button>
       </section>
       <section className="elements">
-        <ul className="elements__list"></ul>
+        <ul className="elements__list">
+          {cards.map(card =><Card {...card} handleCardClick={props.handleCardClick}/>)}
+        </ul>
       </section>
     </main>
   )
