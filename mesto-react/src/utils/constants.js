@@ -11,7 +11,6 @@ export const formElementAvatar = document.querySelector('.popup__form_avatar');
 export const formElementEdit = document.querySelector('.popup__form_edit');
 export const formElementAdd = document.querySelector('.popup__form_add');
 export const nameElement = document.querySelector('.profile__name');
-console.log(nameElement)
 export const textElement = document.querySelector('.profile__text');
 export const avatarInput = document.querySelector('.popup__input_field_avatar-link');
 export const nameInput = document.querySelector('.popup__input_field_name');
