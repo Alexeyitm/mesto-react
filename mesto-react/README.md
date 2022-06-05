@@ -6,7 +6,7 @@
 
 **Ссылка на страницу**
 
-* [Ссылка на страницу в GitHub Pages](https://alexeyitm.github.io/mesto/)
+* [Ссылка на страницу в GitHub Pages](https://alexeyitm.github.io/mesto-react/mesto-react)
 
 **Стек проекта**
 
