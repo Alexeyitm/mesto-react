@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext";
 import CurrentCardsContext from "../context/CurrentCardsContext";
@@ -82,42 +83,7 @@ function App() {
               className="popup__input-error popup__input-error_number_one"
             ></span>
           </PopupWithForm>
-          <PopupWithForm
-            name="user"
-            title="Редактировать профиль"
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            textButton="Сохранить"
-          >
-            <input
-              id="name"
-              className="popup__input popup__input_field_name"
-              type="text"
-              name="Name"
-              placeholder="Имя"
-              minlength="2"
-              maxlength="40"
-              required
-            />
-            <span
-              id="name-error"
-              className="popup__input-error popup__input-error_number_one"
-            ></span>
-            <input
-              id="job"
-              className="popup__input popup__input_field_job"
-              type="text"
-              name="Job"
-              placeholder="Профессиональная деятельность"
-              minlength="2"
-              maxlength="200"
-              required
-            />
-            <span
-              id="job-error"
-              className="popup__input-error popup__input-error_number_two"
-            ></span>
-          </PopupWithForm>
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
           <PopupWithForm
             name="card"
             title="Новое место"
