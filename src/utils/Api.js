@@ -38,7 +38,7 @@ class Api {
       body: JSON.stringify({
         name: inputs.Name,
         about: inputs.Job
-      })
+    })
     })
     .then(res => this._getJSON(res))
   }
@@ -77,22 +77,21 @@ class Api {
     .then(res => this._getJSON(res))
   }
 
-  //ставим лайк
-  addLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-    .then(res => this._getJSON(res))
-  }
-
-  //убираем лайк
-  deleteLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-    .then(res => this._getJSON(res))
+  //ставим-убираем лайк
+  toggleLike(id, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+        method: 'DELETE',
+        headers: this._headers
+      })
+      .then(res => this._getJSON(res))
+    } else {
+      return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+        method: 'PUT',
+        headers: this._headers
+      })
+      .then(res => this._getJSON(res))
+    }
   }
 }
 
