@@ -2,9 +2,9 @@ import React from "react";
 
 function Card(props) {
   const isOwn = props.card.owner._id === props.user._id;
-  const cardDeleteButtonClassName = (`element__button-delete ${isOwn ? ' ' : 'element__button-delete_hidden'}`);
+  const cardDeleteButtonClassName = (`element__button-delete ${isOwn ? '' : 'element__button-delete_hidden'}`);
   const isLiked = props.card.likes.some(i => i._id === props.user._id);
-  const cardLikeButtonClassName = (`element__svg-heart element__svg-heart_hover ${isLiked ? 'element__svg-heart_active' : ' '}`);
+  const cardLikeButtonClassName = (`element__svg-heart element__svg-heart_hover ${isLiked ? 'element__svg-heart_active' : ''}`);
 
 
   function handleClick() {
@@ -26,7 +26,7 @@ function Card(props) {
           alt={props.card.name}
         />
         <div className="element__description">
-          <h2 className="element__figcaption">{props.name}</h2>
+          <h2 className="element__figcaption">{props.card.name}</h2>
           <div className="element__like">
             <button
               className={cardLikeButtonClassName}
