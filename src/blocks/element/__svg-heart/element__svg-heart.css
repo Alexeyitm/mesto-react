@@ -6,5 +6,5 @@
   background: url(../../../image/Vector-heart.svg) no-repeat;
   background-size: cover;
   border: 0;
-  background-color: #FFFFFF;
+  background-color: inherit;
 }

@@ -1,7 +1,11 @@
 import { React, useContext } from "react";
 import Card from "./Card.js";
+import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext"
 import CurrentCardsContext from "../context/CurrentCardsContext"
+
+import { setCards } from "./App"
+
 
 function Main(props) {
   const user = useContext(CurrentUserContext);
@@ -41,19 +45,21 @@ function Main(props) {
       <section className="elements">
         <ul className="elements__list">
           {
-            cards.map(function(card) {
-              const isOwn = card.owner._id === user._id;
-              const cardDeleteButtonClassName = (`element__button-delete ${isOwn ? ' ' : 'element__button-delete_hidden'}`);
-              
-              const isLiked = card.likes.some(i => i._id === user._id);
-              const cardLikeButtonClassName = (`element__svg-heart element__svg-heart_hover ${isLiked ? 'element__svg-heart_active' : ' '}`);
+            cards.map(function(card) {              
+              function handleCardLike(card) {
+                const isLiked = card.likes.some(i => i._id === user._id);
+                console.log(isLiked)
+                api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+                  
+                });
+              } 
 
               return (<Card 
-                {...card}
+                card={card}
+                user={user}
                 key={card._id}
                 handleCardClick={props.handleCardClick}
-                cardDeleteButton = {cardDeleteButtonClassName}
-                cardLikeButton = {cardLikeButtonClassName}
+                onCardLike = {handleCardLike}
               />)
             })
           }

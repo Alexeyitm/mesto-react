@@ -9,14 +9,14 @@ import CurrentUserContext from "../context/CurrentUserContext";
 import CurrentCardsContext from "../context/CurrentCardsContext";
 
 function App() {
-  const [currentUser, setCurrentUser] =  useState({});
-  const [currentCards, setCurrentCards] =  useState([]);
+  const [currentUser, setUser] =  useState({});
+  const [currentCards, setCards] =  useState([]);
 
   useEffect(() => {
     Promise.all([api.getUser(), api.getCards()])
       .then(([userInfo, items]) => {
-        setCurrentUser(userInfo);
-        setCurrentCards(items);
+        setUser(userInfo);
+        setCards(items);
       })
       .catch((err) => console.log(err));
   }, []);
