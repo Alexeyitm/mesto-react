@@ -1,28 +1,11 @@
 import { React, useContext } from "react";
-//import { api } from "../utils/Api.js";
-//import Card from "./Card.js";
+import Card from "./Card.js";
 import CurrentUserContext from "../context/CurrentUserContext"
+import CurrentCardsContext from "../context/CurrentCardsContext"
 
 function Main(props) {
   const user = useContext(CurrentUserContext);
-
-  //const [cards, setCards] = useState([]);
-
-  //useEffect(() => {
-  //  Promise.all([api.getUser(), api.getCards()])
-  //    .then(([userInfo, items]) => {
-//
-  //      setCards(
-  //        items.map((item) => ({
-  //          name: item.name,
-  //          link: item.link,
-  //          likes: item.likes.length,
-  //          key: item._id,
-  //        }))
-  //      );
-  //    })
-  //    .catch((err) => console.log(err));
-  //}, []);
+  const cards = useContext(CurrentCardsContext);
 
   return (
     <main>
@@ -58,12 +41,21 @@ function Main(props) {
       <section className="elements">
         <ul className="elements__list">
           {
-            //cards.map((card) => (
-            //  <Card 
-            //    {...card} 
-            //    handleCardClick={props.handleCardClick} 
-            //  />
-            //))
+            cards.map(function(card) {
+              const isOwn = card.owner._id === user._id;
+              const cardDeleteButtonClassName = (`element__button-delete ${isOwn ? ' ' : 'element__button-delete_hidden'}`);
+              
+              const isLiked = card.likes.some(i => i._id === user._id);
+              const cardLikeButtonClassName = (`element__svg-heart element__svg-heart_hover ${isLiked ? 'element__svg-heart_active' : ' '}`);
+
+              return (<Card 
+                {...card}
+                key={card._id}
+                handleCardClick={props.handleCardClick}
+                cardDeleteButton = {cardDeleteButtonClassName}
+                cardLikeButton = {cardLikeButtonClassName}
+              />)
+            })
           }
         </ul>
       </section>

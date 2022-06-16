@@ -8,7 +8,7 @@ function Card(props) {
   return (
     <li className="element" key={props.myKey}>
       <article className="element__card">
-        <button className="element__button-delete" type="button"></button>
+        <button className={props.cardDeleteButton} type="button"></button>
         <img
           className="element__img"
           onClick={handleClick}
@@ -19,10 +19,10 @@ function Card(props) {
           <h2 className="element__figcaption">{props.name}</h2>
           <div className="element__like">
             <button
-              className="element__svg-heart element__svg-heart_hover"
+              className={props.cardLikeButton}
               type="button"
             ></button>
-            <div className="element__count">{props.likes}</div>
+            <div className="element__count">{props.likes.length}</div>
           </div>
         </div>
       </article>
