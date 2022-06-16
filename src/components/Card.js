@@ -13,11 +13,18 @@ function Card(props) {
   function handleLikeClick() {
     props.onCardLike(props.card);
   }
+  function handleDeleteClick() {
+    props.onCardDelete(props.card);
+  }
 
   return (
     <li className="element" key={props.myKey}>
       <article className="element__card">
-        <button className={cardDeleteButtonClassName} type="button"></button>
+        <button
+          className={cardDeleteButtonClassName}
+          type="button"
+          onClick={handleDeleteClick}
+        ></button>
         <img
           className="element__img"
           onClick={handleClick}

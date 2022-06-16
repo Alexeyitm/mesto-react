@@ -38,7 +38,7 @@ class Api {
       body: JSON.stringify({
         name: inputs.Name,
         about: inputs.Job
-    })
+      })
     })
     .then(res => this._getJSON(res))
   }
@@ -77,7 +77,7 @@ class Api {
     .then(res => this._getJSON(res))
   }
 
-  //ставим-убираем лайк
+  //переключение лайка
   toggleLike(id, isLiked) {
     if (isLiked) {
       return fetch(`${this._baseUrl}/cards/${id}/likes`, {

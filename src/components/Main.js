@@ -13,7 +13,12 @@ function Main(props) {
     api.toggleLike(card._id, isLiked).then((newCard) => {
       props.setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
-  } 
+  }
+  function handleCardDelete(card) {
+    api.deleteCard(card._id).then(() => {
+      props.setCards((state) => state.filter((c) => c._id !== card._id));
+    });
+  }
 
   return (
     <main>
@@ -56,6 +61,7 @@ function Main(props) {
                 key={card._id}
                 handleCardClick={props.handleCardClick}
                 onCardLike = {handleCardLike}
+                onCardDelete = {handleCardDelete}
               />)
             })
           }
