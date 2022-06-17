@@ -54,10 +54,8 @@ function App() {
     api.setUser(user).then((user) => {
       setUser(user);
     })
-    .catch((err) => console.log(err));
-
-
-    closeAllPopups()
+    .catch((err) => console.log(err))
+    .finally(closeAllPopups);
   }
 
   return (
