@@ -3,18 +3,9 @@ import PopupWithForm from './PopupWithForm';
 import CurrentUserContext from "../context/CurrentUserContext"
 
 function EditProfilePopup(props) {
+  const currentUser = useContext(CurrentUserContext);
   const [name, setName] =  useState('');
   const [description, setDescription] =  useState('');
-
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-
-  function handleChangeDescription(e) {
-    setDescription(e.target.value);
-  }
-
-  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     setName(currentUser.name);
@@ -27,7 +18,15 @@ function EditProfilePopup(props) {
       name,
       about: description,
     });
-  } 
+  }
+
+  function handleChangeName(e) {
+    setName(e.target.value);
+  }
+
+  function handleChangeDescription(e) {
+    setDescription(e.target.value);
+  }
 
   return (
     <PopupWithForm
@@ -39,6 +38,7 @@ function EditProfilePopup(props) {
       textButton="Сохранить"
     >
       <input
+        defaultValue={currentUser.name}
         onChange={handleChangeName}
         id="name"
         className="popup__input popup__input_field_name"
@@ -54,6 +54,7 @@ function EditProfilePopup(props) {
         className="popup__input-error popup__input-error_number_one"
       ></span>
       <input
+        defaultValue={currentUser.about}
         onChange={handleChangeDescription}
         id="job"
         className="popup__input popup__input_field_job"
