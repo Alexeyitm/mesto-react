@@ -15,8 +15,8 @@ function App() {
 
   useEffect(() => {
     Promise.all([api.getUser(), api.getCards()])
-      .then(([userInfo, items]) => {
-        setUser(userInfo);
+      .then(([user, items]) => {
+        setUser(user);
         setCards(items);
       })
       .catch((err) => console.log(err));
@@ -51,7 +51,12 @@ function App() {
   }
 
   function handleUpdateUser(user) {
-    api.setUser(user);
+    api.setUser(user).then((user) => {
+      setUser(user);
+    })
+    .catch((err) => console.log(err));
+
+
     closeAllPopups()
   }
 
