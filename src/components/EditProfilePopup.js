@@ -1,7 +1,15 @@
-import React from 'react';
+import { React, useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup(props) {
+  const [name, setName] =  useState('');
+  const [description, setDescription] =  useState('');
+
+  function handleChange(e) {
+    setName(e.target.value);
+    setDescription(e.target.value);
+  }
+
   return (
     <PopupWithForm
       name="user"
@@ -11,6 +19,7 @@ function EditProfilePopup(props) {
       textButton="Сохранить"
     >
       <input
+        onChange={handleChange}
         id="name"
         className="popup__input popup__input_field_name"
         type="text"
@@ -25,6 +34,7 @@ function EditProfilePopup(props) {
         className="popup__input-error popup__input-error_number_one"
       ></span>
       <input
+        onChange={handleChange}
         id="job"
         className="popup__input popup__input_field_job"
         type="text"
