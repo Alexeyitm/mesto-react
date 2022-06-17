@@ -6,8 +6,11 @@ function EditProfilePopup(props) {
   const [name, setName] =  useState('');
   const [description, setDescription] =  useState('');
 
-  function handleChange(e) {
+  function handleChangeName(e) {
     setName(e.target.value);
+  }
+
+  function handleChangeDescription(e) {
     setDescription(e.target.value);
   }
 
@@ -20,8 +23,6 @@ function EditProfilePopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-  
-    // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdateUser({
       name,
       about: description,
@@ -34,11 +35,11 @@ function EditProfilePopup(props) {
       name="user"
       title="Редактировать профиль"
       isOpen={props.isOpen}
-      onClose={props.isClose}
+      onClose={props.onClose}
       textButton="Сохранить"
     >
       <input
-        onChange={handleChange}
+        onChange={handleChangeName}
         id="name"
         className="popup__input popup__input_field_name"
         type="text"
@@ -53,7 +54,7 @@ function EditProfilePopup(props) {
         className="popup__input-error popup__input-error_number_one"
       ></span>
       <input
-        onChange={handleChange}
+        onChange={handleChangeDescription}
         id="job"
         className="popup__input popup__input_field_job"
         type="text"

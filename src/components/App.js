@@ -50,10 +50,8 @@ function App() {
     setIsSelectedCard({});
   }
 
-  function handleUpdateUser() {
-    //console.log(currentUser)
-    api.setUser({name: 'Alexey', about: 'developer'});
-
+  function handleUpdateUser(user) {
+    api.setUser(user);
     closeAllPopups()
   }
 
