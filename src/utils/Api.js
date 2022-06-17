@@ -66,12 +66,12 @@ class Api {
   }
 
   //устанавливаем новый аватар
-  setAvatar(input) {
+  setAvatar(picture) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: input.Link
+        avatar: picture.link
       })
     })
     .then(res => this._getJSON(res))

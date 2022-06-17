@@ -58,6 +58,14 @@ function App() {
     .finally(closeAllPopups);
   }
 
+  function handleUpdateAvatar(picture) {
+    api.setAvatar(picture).then((user) => {
+      setUser(user);
+    })
+    .catch((err) => console.log(err))
+    .finally(closeAllPopups);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentCardsContext.Provider value={currentCards}>
@@ -74,6 +82,7 @@ function App() {
           <EditAvatarPopup 
             isOpen={isEditAvatarPopupOpen} 
             onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
           />
           <EditProfilePopup 
             isOpen={isEditProfilePopupOpen} 

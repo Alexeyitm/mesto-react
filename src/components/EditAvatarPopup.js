@@ -1,9 +1,19 @@
-import { React } from 'react';
+import { React, useRef } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
+  const inputRef = useRef();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onUpdateAvatar({
+      link: inputRef.current.value
+    });
+  } 
+
   return (
     <PopupWithForm
+      onSubmit={handleSubmit}
       name="avatar"
       title="Обновить аватар"
       isOpen={props.isOpen}
@@ -11,6 +21,7 @@ function EditAvatarPopup(props) {
       textButton="Сохранить"
     >
       <input
+        ref={inputRef}
         id="link-avatar"
         className="popup__input popup__input_field_avatar-link"
         type="url"
