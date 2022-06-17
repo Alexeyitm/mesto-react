@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext";
@@ -71,30 +72,13 @@ function App() {
             setCards={setCards}
           />
           <Footer />
-          <PopupWithForm
-            name="avatar"
-            title="Обновить аватар"
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            textButton="Сохранить"
-          >
-            <input
-              id="link-avatar"
-              className="popup__input popup__input_field_avatar-link"
-              type="url"
-              name="Link"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span
-              id="link-avatar-error"
-              className="popup__input-error popup__input-error_number_one"
-            ></span>
-          </PopupWithForm>
+          <EditAvatarPopup 
+            isOpen={isEditAvatarPopupOpen} 
+            onClose={closeAllPopups} />
           <EditProfilePopup 
             isOpen={isEditProfilePopupOpen} 
             onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}/>
+            onUpdateUser={handleUpdateUser} />
           <PopupWithForm
             name="card"
             title="Новое место"
@@ -110,8 +94,7 @@ function App() {
               minLength="2"
               maxLength="30"
               placeholder="Название"
-              required
-            />
+              required />
             <span
               id="place-error"
               className="popup__input-error popup__input-error_number_one"
