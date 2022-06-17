@@ -13,6 +13,10 @@ import CurrentCardsContext from "../context/CurrentCardsContext";
 function App() {
   const [currentUser, setUser] =  useState({});
   const [currentCards, setCards] =  useState([]);
+  const [isEditAvatarPopupOpen, setIsAvatarPopup] = useState(false);
+  const [isEditProfilePopupOpen, setIsProfilePopup] = useState(false);
+  const [isAddPlacePopupOpen, setIsPlacePopup] = useState(false);
+  const [selectedCard, setIsSelectedCard] = useState({});
 
   useEffect(() => {
     Promise.all([api.getUser(), api.getCards()])
@@ -22,11 +26,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, []);
-
-  const [isEditAvatarPopupOpen, setIsAvatarPopup] = useState(false);
-  const [isEditProfilePopupOpen, setIsProfilePopup] = useState(false);
-  const [isAddPlacePopupOpen, setIsPlacePopup] = useState(false);
-  const [selectedCard, setIsSelectedCard] = useState({});
 
   function handleClickEditAvatar() {
     setIsAvatarPopup(true);
