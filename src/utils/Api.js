@@ -31,13 +31,13 @@ class Api {
   
 
   //устанавливаем имя и описание
-  setUser(inputs) {
+  setUser(user) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: inputs.Name,
-        about: inputs.Job
+        name: user.name,
+        about: user.about
       })
     })
     .then(res => this._getJSON(res))

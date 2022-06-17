@@ -50,6 +50,13 @@ function App() {
     setIsSelectedCard({});
   }
 
+  function handleUpdateUser() {
+    //console.log(currentUser)
+    api.setUser({name: 'Alexey', about: 'developer'});
+
+    closeAllPopups()
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentCardsContext.Provider value={currentCards}>
@@ -83,7 +90,10 @@ function App() {
               className="popup__input-error popup__input-error_number_one"
             ></span>
           </PopupWithForm>
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+          <EditProfilePopup 
+            isOpen={isEditProfilePopupOpen} 
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}/>
           <PopupWithForm
             name="card"
             title="Новое место"
@@ -96,8 +106,8 @@ function App() {
               className="popup__input popup__input_field_place"
               type="text"
               name="Place"
-              minlength="2"
-              maxlength="30"
+              minLength="2"
+              maxLength="30"
               placeholder="Название"
               required
             />
