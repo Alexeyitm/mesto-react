@@ -74,11 +74,13 @@ function App() {
           <Footer />
           <EditAvatarPopup 
             isOpen={isEditAvatarPopupOpen} 
-            onClose={closeAllPopups} />
+            onClose={closeAllPopups}
+          />
           <EditProfilePopup 
             isOpen={isEditProfilePopupOpen} 
             onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser} />
+            onUpdateUser={handleUpdateUser}
+          />
           <PopupWithForm
             name="card"
             title="Новое место"
@@ -94,7 +96,8 @@ function App() {
               minLength="2"
               maxLength="30"
               placeholder="Название"
-              required />
+              required
+            />
             <span
               id="place-error"
               className="popup__input-error popup__input-error_number_one"
