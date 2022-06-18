@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -8,18 +8,16 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext";
-import CurrentCardsContext from "../context/CurrentCardsContext";
 
 function App() {
-  const user = useContext(CurrentUserContext);
-  const cards = useContext(CurrentCardsContext);
-  
   const [currentUser, setUser] =  useState({});
   const [currentCards, setCards] =  useState([]);
   const [isEditAvatarPopupOpen, setIsAvatarPopup] = useState(false);
   const [isEditProfilePopupOpen, setIsProfilePopup] = useState(false);
   const [isAddPlacePopupOpen, setIsPlacePopup] = useState(false);
   const [selectedCard, setIsSelectedCard] = useState({});
+
+  const user = useContext(CurrentUserContext);
 
   useEffect(() => {
     Promise.all([api.getUser(), api.getCards()])
@@ -48,6 +46,7 @@ function App() {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
   }
+
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));
@@ -83,10 +82,10 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <CurrentCardsContext.Provider value={currentCards}>
         <div className="content">
           <Header />
           <Main
+            cards={currentCards}
             onEditAvatar={handleClickEditAvatar}
             onEditProfile={handleClickEditProfile}
             onCardLike={handleCardLike}
@@ -151,7 +150,6 @@ function App() {
             onClose={closeAllPopups} 
           />
         </div>
-      </CurrentCardsContext.Provider>
     </CurrentUserContext.Provider>
   );
 }
