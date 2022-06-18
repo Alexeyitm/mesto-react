@@ -1,24 +1,24 @@
 import React from "react";
 
-function Card(props) {
-  const isOwn = props.card.owner._id === props.user._id;
+function Card({ card, user, myKey, handleCardClick, onCardLike, onCardDelete }) {
+  const isOwn = card.owner._id === user._id;
   const cardDeleteButtonClassName = (`element__button-delete ${isOwn ? '' : 'element__button-delete_hidden'}`);
-  const isLiked = props.card.likes.some(i => i._id === props.user._id);
+  const isLiked = card.likes.some(i => i._id === user._id);
   const cardLikeButtonClassName = (`element__svg-heart element__svg-heart_hover ${isLiked ? 'element__svg-heart_active' : ''}`);
 
 
   function handleClick() {
-    props.handleCardClick({ link: props.card.link, name: props.card.name });
+    handleCardClick({ link: card.link, name: card.name });
   }
   function handleLikeClick() {
-    props.onCardLike(props.card);
+    onCardLike(card);
   }
   function handleDeleteClick() {
-    props.onCardDelete(props.card);
+    onCardDelete(card);
   }
 
   return (
-    <li className="element" key={props.myKey}>
+    <li className="element" key={myKey}>
       <article className="element__card">
         <button
           className={cardDeleteButtonClassName}
@@ -28,18 +28,18 @@ function Card(props) {
         <img
           className="element__img"
           onClick={handleClick}
-          src={props.card.link}
-          alt={props.card.name}
+          src={card.link}
+          alt={card.name}
         />
         <div className="element__description">
-          <h2 className="element__figcaption">{props.card.name}</h2>
+          <h2 className="element__figcaption">{card.name}</h2>
           <div className="element__like">
             <button
               className={cardLikeButtonClassName}
               type="button"
               onClick={handleLikeClick}
             ></button>
-            <div className="element__count">{props.card.likes.length}</div>
+            <div className="element__count">{card.likes.length}</div>
           </div>
         </div>
       </article>

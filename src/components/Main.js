@@ -4,19 +4,19 @@ import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext"
 import CurrentCardsContext from "../context/CurrentCardsContext"
 
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, handleCardClick, setCards }) {
   const user = useContext(CurrentUserContext);
   const cards = useContext(CurrentCardsContext);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === user._id);
     api.toggleLike(card._id, isLiked).then((newCard) => {
-      props.setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
   }
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
-      props.setCards((state) => state.filter((c) => c._id !== card._id));
+      setCards((state) => state.filter((c) => c._id !== card._id));
     });
   }
 
@@ -26,7 +26,7 @@ function Main(props) {
         <button
           className="profile__button-avatar"
           type="button"
-          onClick={props.onEditAvatar}
+          onClick={onEditAvatar}
         >
           <img
             className="profile__avatar-img"
@@ -40,7 +40,7 @@ function Main(props) {
             <button
               className="profile__button-edit"
               type="button"
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             ></button>
           </div>
           <p className="profile__text">{user.about}</p>
@@ -48,7 +48,7 @@ function Main(props) {
         <button
           className="profile__button-add"
           type="button"
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
       <section className="elements">
@@ -59,7 +59,7 @@ function Main(props) {
                 card={card}
                 user={user}
                 key={card._id}
-                handleCardClick={props.handleCardClick}
+                handleCardClick={handleCardClick}
                 onCardLike = {handleCardLike}
                 onCardDelete = {handleCardDelete}
               />)

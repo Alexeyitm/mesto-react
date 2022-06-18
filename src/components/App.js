@@ -92,9 +92,9 @@ function App() {
           <PopupWithForm
             name="card"
             title="Новое место"
+            textButton="Создать"
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-            textButton="Создать"
           >
             <input
               id="place"
