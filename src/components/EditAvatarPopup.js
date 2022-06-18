@@ -1,4 +1,4 @@
-import { React, useRef } from 'react';
+import { useRef } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
@@ -9,7 +9,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     onUpdateAvatar({
       link: inputRef.current.value
     });
-  } 
+  }
 
   return (
     <PopupWithForm

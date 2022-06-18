@@ -1,24 +1,11 @@
-import { React, useContext } from "react";
+import { useContext } from "react";
 import Card from "./Card.js";
-import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext"
-import CurrentCardsContext from "../context/CurrentCardsContext"
+import CurrentCardsContext from "../context/CurrentCardsContext.js";
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace, handleCardClick, setCards }) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardLike, onCardDelete, handleCardClick }) {
   const user = useContext(CurrentUserContext);
   const cards = useContext(CurrentCardsContext);
-
-  function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === user._id);
-    api.toggleLike(card._id, isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
-  }
-  function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id));
-    });
-  }
 
   return (
     <main>
@@ -60,8 +47,8 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, handleCardClick, setCar
                 user={user}
                 key={card._id}
                 handleCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
               />)
             })
           }

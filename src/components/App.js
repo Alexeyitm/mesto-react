@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from "react";
+import { useEffect, useState, useContext} from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -11,6 +11,9 @@ import CurrentUserContext from "../context/CurrentUserContext";
 import CurrentCardsContext from "../context/CurrentCardsContext";
 
 function App() {
+  const user = useContext(CurrentUserContext);
+  const cards = useContext(CurrentCardsContext);
+  
   const [currentUser, setUser] =  useState({});
   const [currentCards, setCards] =  useState([]);
   const [isEditAvatarPopupOpen, setIsAvatarPopup] = useState(false);
@@ -39,6 +42,18 @@ function App() {
     setIsPlacePopup(true);
   }
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === user._id);
+    api.toggleLike(card._id, isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    });
+  }
+  function handleCardDelete(card) {
+    api.deleteCard(card._id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id));
+    });
+  }
+
   function handleCardClick(card) {
     setIsSelectedCard(card);
   }
@@ -50,16 +65,16 @@ function App() {
     setIsSelectedCard({});
   }
 
-  function handleUpdateUser(user) {
-    api.setUser(user).then((user) => {
+  function handleUpdateAvatar(picture) {
+    api.setAvatar(picture).then((user) => {
       setUser(user);
     })
     .catch((err) => console.log(err))
     .finally(closeAllPopups);
   }
 
-  function handleUpdateAvatar(picture) {
-    api.setAvatar(picture).then((user) => {
+  function handleUpdateUser(user) {
+    api.setUser(user).then((user) => {
       setUser(user);
     })
     .catch((err) => console.log(err))
@@ -74,6 +89,8 @@ function App() {
           <Main
             onEditAvatar={handleClickEditAvatar}
             onEditProfile={handleClickEditProfile}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
             onAddPlace={handleClickAddPlace}
             handleCardClick={handleCardClick}
             setCards={setCards}
