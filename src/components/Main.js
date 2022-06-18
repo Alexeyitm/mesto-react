@@ -60,8 +60,8 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, handleCardClick, setCar
                 user={user}
                 key={card._id}
                 handleCardClick={handleCardClick}
-                onCardLike = {handleCardLike}
-                onCardDelete = {handleCardDelete}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
               />)
             })
           }
