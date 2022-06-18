@@ -1,7 +1,26 @@
-import { React } from 'react';
+import { useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlacePopup({ isOpen, onClose }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+  const [place, setPlace] =  useState('');
+  const [link, setLink] =  useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onAddPlace({
+      place: place,
+      link: link,
+    });
+  }
+
+  function handleChangePlace(e) {
+    setPlace(e.target.value);
+  }
+
+  function handleChangeLink(e) {
+    setLink(e.target.value);
+  }
+
   return (
     <PopupWithForm
             name="card"
@@ -9,8 +28,10 @@ function AddPlacePopup({ isOpen, onClose }) {
             textButton="Создать"
             isOpen={isOpen}
             onClose={onClose}
+            onSubmit={handleSubmit}
           >
             <input
+              onChange={handleChangePlace}
               id="place"
               className="popup__input popup__input_field_place"
               type="text"
@@ -25,6 +46,7 @@ function AddPlacePopup({ isOpen, onClose }) {
               className="popup__input-error popup__input-error_number_one"
             ></span>
             <input
+              onChange={handleChangeLink}
               id="link"
               className="popup__input popup__input_field_link"
               type="url"

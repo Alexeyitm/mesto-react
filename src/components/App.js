@@ -81,6 +81,14 @@ function App() {
     .finally(closeAllPopups);
   }
 
+  function handleAddPlaceSubmit(card) {
+    api.setCard(card).then((newCard) => {
+      setCards([newCard, ...currentCards]); 
+    })
+    .catch((err) => console.log(err))
+    .finally(closeAllPopups);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
         <div className="content">
@@ -109,6 +117,7 @@ function App() {
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
           />
           <PopupWithForm 
             name="confirm" 

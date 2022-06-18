@@ -44,13 +44,13 @@ class Api {
   }
 
   //устанавливаем новую карточку
-  setCard(item) {
+  setCard(card) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: item.Place,
-        link: item.Link,
+        name: card.place,
+        link: card.link,
       })
     })
     .then(res => this._getJSON(res))
