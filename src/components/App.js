@@ -42,8 +42,9 @@ function App() {
     setIsPlacePopup(true);
   }
 
-  function handleClickDeleteCard() {
+  function handleClickDeleteCard(card) {
     setIsCardPopup(true);
+    console.log(card)
   }
 
   function handleCardLike(card) {
