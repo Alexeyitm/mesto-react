@@ -10,7 +10,12 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     onAddPlace({
       place: place,
       link: link,
-    });
+    }, setPlace, setLink);
+
+    setTimeout(() => {
+      setPlace('');
+      setLink('');
+    }, 1500);
   }
 
   function handleChangePlace(e) {
@@ -32,6 +37,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
           >
             <input
               onChange={handleChangePlace}
+              value={place}
               id="place"
               className="popup__input popup__input_field_place"
               type="text"
@@ -47,6 +53,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             ></span>
             <input
               onChange={handleChangeLink}
+              value={link}
               id="link"
               className="popup__input popup__input_field_link"
               type="url"
