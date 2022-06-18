@@ -6,6 +6,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
+import AddPlacePopup from "./AddPlacePopup"
 import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext";
 
@@ -105,40 +106,10 @@ function App() {
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
-          <PopupWithForm
-            name="card"
-            title="Новое место"
-            textButton="Создать"
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-          >
-            <input
-              id="place"
-              className="popup__input popup__input_field_place"
-              type="text"
-              name="Place"
-              minLength="2"
-              maxLength="30"
-              placeholder="Название"
-              required
-            />
-            <span
-              id="place-error"
-              className="popup__input-error popup__input-error_number_one"
-            ></span>
-            <input
-              id="link"
-              className="popup__input popup__input_field_link"
-              type="url"
-              name="Link"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span
-              id="link-error"
-              className="popup__input-error popup__input-error_number_two"
-            ></span>
-          </PopupWithForm>
+          />
           <PopupWithForm 
             name="confirm" 
             title="Вы уверены?"
