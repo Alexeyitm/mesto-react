@@ -45,7 +45,7 @@ function App() {
   function handleClickDeleteCard(card) {
     deleteIsCardPopup({isOpen: true, card: card});  
   }
-  
+
   function handleCardClick(card) {
     setIsSelectedCard(card);
   }
@@ -64,14 +64,6 @@ function App() {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
     .catch((err) => console.log(err))
-  }
-
-  function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id));   
-    })
-    .catch((err) => console.log(err))
-    .finally(closeAllPopups);
   }
 
   function handleUpdateAvatar(picture) {
@@ -93,6 +85,14 @@ function App() {
   function handleAddPlaceSubmit(card) {
     api.setCard(card).then((newCard) => {
       setCards([newCard, ...currentCards]); 
+    })
+    .catch((err) => console.log(err))
+    .finally(closeAllPopups);
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id));   
     })
     .catch((err) => console.log(err))
     .finally(closeAllPopups);
