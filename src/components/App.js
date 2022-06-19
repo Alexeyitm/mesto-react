@@ -73,10 +73,7 @@ function App() {
       setUser(user);
     })
     .catch((err) => console.log(err))
-    .finally(() => {
-      closeAllPopups();
-      setTimeout(() => setTextButton("Сохранить"), 1000);
-    });
+    .finally(() => ClosePopup('Сохранить', setTextButton));
   }
 
   function handleUpdateUser(user, setTextButton) {
@@ -86,10 +83,7 @@ function App() {
       setUser(user);
     })
     .catch((err) => console.log(err))
-    .finally(() => {
-      closeAllPopups();
-      setTimeout(() => setTextButton("Сохранить"), 1000);
-    });
+    .finally(() => ClosePopup('Сохранить', setTextButton));
   }
 
   function handleAddPlaceSubmit(card, setTextButton) {
@@ -99,10 +93,7 @@ function App() {
       setCards([newCard, ...currentCards]); 
     })
     .catch((err) => console.log(err))
-    .finally(() => {
-      closeAllPopups();
-      setTimeout(() => setTextButton("Создать"), 1000);
-    });
+    .finally(() => ClosePopup('Создать', setTextButton));
   }
 
   function handleCardDelete(card, setTextButton) {
@@ -112,10 +103,12 @@ function App() {
       setCards((state) => state.filter((c) => c._id !== card._id));   
     })
     .catch((err) => console.log(err))
-    .finally(() => {
-      closeAllPopups();
-      setTimeout(() => setTextButton("Да"), 1000);
-    });
+    .finally(() => ClosePopup('Да', setTextButton));
+  }
+
+  function ClosePopup(textButton, setTextButton) {
+    closeAllPopups();
+    setTimeout(() => setTextButton(textButton), 1000);
   }
 
   return (
