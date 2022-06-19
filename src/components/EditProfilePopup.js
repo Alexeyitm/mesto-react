@@ -4,6 +4,7 @@ import CurrentUserContext from "../context/CurrentUserContext"
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
+  
   const [name, setName] =  useState('');
   const [description, setDescription] =  useState('');
   const [textButton, setTextButton] = useState("Сохранить");

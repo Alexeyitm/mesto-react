@@ -11,6 +11,8 @@ import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext";
 
 function App() {
+  const user = useContext(CurrentUserContext);
+
   const [currentUser, setUser] =  useState({});
   const [currentCards, setCards] =  useState([]);
   const [isEditAvatarPopupOpen, setIsAvatarPopup] = useState(false);
@@ -18,8 +20,6 @@ function App() {
   const [isAddPlacePopupOpen, setIsPlacePopup] = useState(false);
   const [isDeleteCardPopupOpen, deleteIsCardPopup] = useState({isOpen: false, card: {}});
   const [selectedCard, setIsSelectedCard] = useState({});
-
-  const user = useContext(CurrentUserContext);
 
   useEffect(() => {
     Promise.all([api.getUser(), api.getCards()])

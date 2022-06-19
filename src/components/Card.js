@@ -6,16 +6,18 @@ function Card({ card, user, myKey, handleCardClick, onCardLike, onCardDelete }) 
   const isLiked = card.likes.some(i => i._id === user._id);
   const cardLikeButtonClassName = (`element__svg-heart element__svg-heart_hover ${isLiked ? 'element__svg-heart_active' : ''}`);
 
-
   function handleClick() {
     handleCardClick({ link: card.link, name: card.name });
   }
-  function handleLikeClick() {
-    onCardLike(card);
-  }
+
   function handleDeleteClick() {
     onCardDelete(card);
   }
+
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+
 
   return (
     <li className="element" key={myKey}>
