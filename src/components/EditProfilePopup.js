@@ -6,6 +6,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] =  useState('');
   const [description, setDescription] =  useState('');
+  const [textButton, setTextButton] = useState("Сохранить");
 
   useEffect(() => {
     setName(currentUser.name);
@@ -17,7 +18,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     onUpdateUser({
       name,
       about: description,
-    });
+    }, setTextButton);
   }
 
   function handleChangeName(e) {
@@ -32,7 +33,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     <PopupWithForm
       name="user"
       title="Редактировать профиль"
-      textButton="Сохранить"
+      textButton={textButton}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

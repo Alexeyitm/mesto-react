@@ -1,21 +1,23 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+  const [textButton, setTextButton] = useState("Сохранить");
+
   const inputRef = useRef();
 
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar({
       link: inputRef.current.value
-    });
+    }, setTextButton);
   }
 
   return (
     <PopupWithForm
       name="avatar"
       title="Обновить аватар"
-      textButton="Сохранить"
+      textButton={textButton}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

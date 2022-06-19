@@ -4,13 +4,14 @@ import PopupWithForm from './PopupWithForm';
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   const [place, setPlace] =  useState('');
   const [link, setLink] =  useState('');
+  const [textButton, setTextButton] = useState("Создать");
 
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlace({
       place: place,
       link: link,
-    }, setPlace, setLink);
+    }, setTextButton);
 
     setTimeout(() => {
       setPlace('');
@@ -30,7 +31,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     <PopupWithForm
             name="card"
             title="Новое место"
-            textButton="Создать"
+            textButton={textButton}
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}

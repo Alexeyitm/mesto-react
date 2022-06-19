@@ -66,36 +66,56 @@ function App() {
     .catch((err) => console.log(err))
   }
 
-  function handleUpdateAvatar(picture) {
+  function handleUpdateAvatar(picture, setTextButton) {
+    setTextButton("Сохранение...");
+
     api.setAvatar(picture).then((user) => {
       setUser(user);
     })
     .catch((err) => console.log(err))
-    .finally(closeAllPopups);
+    .finally(() => {
+      closeAllPopups();
+      setTimeout(() => setTextButton("Сохранить"), 1000);
+    });
   }
 
-  function handleUpdateUser(user) {
+  function handleUpdateUser(user, setTextButton) {
+    setTextButton("Сохранение...");
+
     api.setUser(user).then((user) => {
       setUser(user);
     })
     .catch((err) => console.log(err))
-    .finally(closeAllPopups);
+    .finally(() => {
+      closeAllPopups();
+      setTimeout(() => setTextButton("Сохранить"), 1000);
+    });
   }
 
-  function handleAddPlaceSubmit(card) {
+  function handleAddPlaceSubmit(card, setTextButton) {
+    setTextButton("Создание...");
+
     api.setCard(card).then((newCard) => {
       setCards([newCard, ...currentCards]); 
     })
     .catch((err) => console.log(err))
-    .finally(closeAllPopups);
+    .finally(() => {
+      closeAllPopups();
+      setTimeout(() => setTextButton("Создать"), 1000);
+    });
   }
 
-  function handleCardDelete(card) {
+  function handleCardDelete(card, setTextButton) {
+    setTextButton("Удаление...");
+
     api.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));   
     })
     .catch((err) => console.log(err))
-    .finally(closeAllPopups);
+    .finally(() => {
+      closeAllPopups();
+      setTimeout(() => setTextButton("Да"), 1000);
+    });
   }
 
   return (
