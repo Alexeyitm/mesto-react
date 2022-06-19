@@ -11,6 +11,10 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     onUpdateAvatar({
       link: inputRef.current.value
     }, setTextButton);
+
+    setTimeout(() => {
+      inputRef.current.value = "";
+    }, 1000);
   }
 
   return (
