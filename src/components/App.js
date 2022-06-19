@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -11,8 +11,6 @@ import { api } from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext";
 
 function App() {
-  const user = useContext(CurrentUserContext);
-
   const [currentUser, setUser] =  useState({});
   const [currentCards, setCards] =  useState([]);
   const [isEditAvatarPopupOpen, setIsAvatarPopup] = useState(false);
@@ -20,6 +18,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsPlacePopup] = useState(false);
   const [isDeleteCardPopupOpen, deleteIsCardPopup] = useState({isOpen: false, card: {}});
   const [selectedCard, setIsSelectedCard] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     Promise.all([api.getUser(), api.getCards()])
@@ -56,59 +55,53 @@ function App() {
     setIsPlacePopup(false);
     deleteIsCardPopup({isOpen: false, card: {}});
     setIsSelectedCard({});
+    setTimeout(() => {
+      setIsSaving(false);
+    }, 500);
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === user._id);
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.toggleLike(card._id, isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
     .catch((err) => console.log(err))
   }
 
-  function handleUpdateAvatar(picture, setTextButton) {
-    setTextButton("Сохранение...");
-
+  function handleUpdateAvatar(picture) {
+    setIsSaving(true);
     api.setAvatar(picture).then((user) => {
       setUser(user);
     })
     .catch((err) => console.log(err))
-    .finally(() => ClosePopup('Сохранить', setTextButton));
+    .finally(closeAllPopups);
   }
 
-  function handleUpdateUser(user, setTextButton) {
-    setTextButton("Сохранение...");
-
+  function handleUpdateUser(user) {
+    setIsSaving(true);
     api.setUser(user).then((user) => {
       setUser(user);
     })
     .catch((err) => console.log(err))
-    .finally(() => ClosePopup('Сохранить', setTextButton));
+    .finally(closeAllPopups);
   }
 
-  function handleAddPlaceSubmit(card, setTextButton) {
-    setTextButton("Создание...");
-
+  function handleAddPlaceSubmit(card) {
+    setIsSaving(true);
     api.setCard(card).then((newCard) => {
       setCards([newCard, ...currentCards]); 
     })
     .catch((err) => console.log(err))
-    .finally(() => ClosePopup('Создать', setTextButton));
+    .finally(closeAllPopups);
   }
 
-  function handleCardDelete(card, setTextButton) {
-    setTextButton("Удаление...");
-
+  function handleCardDelete(card) {
+    setIsSaving(true);
     api.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((c) => c._id !== card._id));   
     })
     .catch((err) => console.log(err))
-    .finally(() => ClosePopup('Да', setTextButton));
-  }
-
-  function ClosePopup(textButton, setTextButton) {
-    closeAllPopups();
-    setTimeout(() => setTextButton(textButton), 1000);
+    .finally(closeAllPopups);
   }
 
   return (
@@ -130,22 +123,26 @@ function App() {
             isOpen={isEditAvatarPopupOpen} 
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            isSaving={isSaving}
           />
           <EditProfilePopup 
             isOpen={isEditProfilePopupOpen} 
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            isSaving={isSaving}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
+            isSaving={isSaving}
           />
           <DeleteCardPopup
             card={isDeleteCardPopupOpen.card}
             isOpen={isDeleteCardPopupOpen.isOpen}
             onClose={closeAllPopups}
             deleteCard={handleCardDelete}
+            isSaving={isSaving}
           />
           <ImagePopup 
             card={selectedCard} 

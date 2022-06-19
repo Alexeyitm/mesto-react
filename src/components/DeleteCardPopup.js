@@ -1,19 +1,17 @@
-import { useState } from 'react';
+import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function DeleteCardPopup({ card, isOpen, onClose, deleteCard }) {
-  const [textButton, setTextButton] = useState("Да");
-
+function DeleteCardPopup({ card, isOpen, onClose, deleteCard, isSaving }) {
   function handleSubmit(e) {
     e.preventDefault();
-    deleteCard(card, setTextButton);
+    deleteCard(card);
   }
 
   return (
     <PopupWithForm 
       name="confirm" 
       title="Вы уверены?"
-      textButton={textButton}
+      textButton={isSaving ? 'Удаление...' : 'Да'}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

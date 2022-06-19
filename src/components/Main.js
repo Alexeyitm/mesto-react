@@ -42,7 +42,6 @@ function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardLike, hand
             cards.map(function(card) {              
               return (<Card 
                 card={card}
-                user={user}
                 key={card._id}
                 handleCardClick={handleCardClick}
                 onCardLike={onCardLike}

@@ -1,23 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, isSaving }) {
   const [place, setPlace] =  useState('');
   const [link, setLink] =  useState('');
-  const [textButton, setTextButton] = useState("Создать");
 
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlace({
       place: place,
       link: link,
-    }, setTextButton);
+    });
+  }
 
+  useEffect(() => {
     setTimeout(() => {
       setPlace('');
       setLink('');
-    }, 1500);
-  }
+    }, 500);
+  }, [isOpen]);
 
   function handleChangePlace(e) {
     setPlace(e.target.value);
@@ -31,7 +32,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     <PopupWithForm
             name="card"
             title="Новое место"
-            textButton={textButton}
+            textButton={isSaving ? 'Создание...' : 'Создать'}
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}

@@ -3,12 +3,12 @@ class Api {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
 
-    this._getJSON = function (res) {{
+    this._getJSON = function (res) {
       if (res.ok) {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
-    }}
+    }
   }
   
   //получаем даные пользователя
