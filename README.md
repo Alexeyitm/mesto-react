@@ -8,8 +8,20 @@
 
 * HTML
 * CSS
-* JS
+    * Flexbox
+    * Grid
+* JavaScript
+    * ООП
+    * AJAX
+    * API
 * React.js
+  * CRA
+  * JSX
+  * Hooks
+  * React DOM
+* БЭМ, Nested
+* Git
+* Webpack
 
 ## Как работать с проектом:
 
