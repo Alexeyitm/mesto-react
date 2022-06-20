@@ -45,6 +45,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isSaving }) {
     >
       <input
         onChange={handleChangeName}
+        defaultValue={currentUser.name}
         id="name"
         className="popup__input popup__input_field_name"
         type="text"
@@ -60,6 +61,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isSaving }) {
       ></span>
       <input
         onChange={handleChangeDescription}
+        defaultValue={currentUser.about}
         id="job"
         className="popup__input popup__input_field_job"
         type="text"
