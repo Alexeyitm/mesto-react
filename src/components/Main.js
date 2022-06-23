@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Card from './Card.js';
+import Sort from './Sort';
 import CurrentUserContext from '../context/CurrentUserContext'
 
 function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardLike, handleCardClick, onCardDelete }) {
@@ -36,6 +37,7 @@ function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardLike, hand
           onClick={onAddPlace}
         ></button>
       </section>
+      <Sort cards={cards}/>
       <section className='elements'>
         <ul className='elements__list'>
           {

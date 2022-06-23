@@ -23,6 +23,10 @@
 @import url(./blocks/profile/__text/profile__text.css);
 @import url(./blocks/profile/__button-add/profile__button-add.css);
 
+/* Sort */
+@import url(./blocks/sort/sort.css);
+@import url(./blocks/sort/__button/sort__button.css);
+
 /* Elements */
 @import url(./blocks/elements/elements.css);
 @import url(./blocks/elements/__list/elements__list.css);

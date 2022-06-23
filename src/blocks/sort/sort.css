@@ -1,19 +1,19 @@
-.footer {
+.sort {
   width: 880px;
   margin: 0 auto;
-  padding-top: 67px;
+  padding: 0 0 20px;
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (min-width: 320px) and (max-width: 1024px) {
-  .footer {
+  .sort {
     width: calc(282px + (880 - 282) * (100vw - 320px) / (1024 - 320));
-    height: calc(14px + (18 - 14) * (100vw - 320px) / (1024 - 320));
-    padding-top: calc(48px + (67 - 48) * (100vw - 320px) / (1024 - 320));
   }
 }
 
 @media screen and (max-width: 320px) {
-  .footer {
+  .sort {
     width: 282px;
   }
 }
