@@ -112,10 +112,10 @@ function App() {
             cards={currentCards}
             onEditAvatar={handleClickEditAvatar}
             onEditProfile={handleClickEditProfile}
-            onCardLike={handleCardLike}
-            onCardDelete={handleClickDeleteCard}
             onAddPlace={handleClickAddPlace}
+            onCardLike={handleCardLike}
             handleCardClick={handleCardClick}
+            onCardDelete={handleClickDeleteCard}
             setCards={setCards}
           />
           <Footer />

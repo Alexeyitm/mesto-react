@@ -1,7 +1,7 @@
 import { useContext} from 'react';
 import CurrentUserContext from '../context/CurrentUserContext'
 
-function Sort({ cards }) {
+function Sort({ cards, setCards }) {
   const user = useContext(CurrentUserContext);
 
   return (
