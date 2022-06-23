@@ -2,18 +2,18 @@ import { useContext } from 'react';
 import Card from './Card.js';
 import Sort from './Sort';
 import CurrentUserContext from '../context/CurrentUserContext'
+import { Route, Routes } from 'react-router';
 
 function Main({ 
-  cards, 
+  cards,
+  myCards,
+  otherCards,
   onEditAvatar, 
   onEditProfile, 
   onAddPlace, 
   onCardLike, 
   handleCardClick, 
   onCardDelete,
-  selectAllCards,
-  selectMyCards,
-  selectNotMyCards
 }) {
 
   const user = useContext(CurrentUserContext);
@@ -50,23 +50,50 @@ function Main({
         ></button>
       </section>
       <Sort
-        selectAllCards={selectAllCards}
-        selectMyCards={selectMyCards}
-        selectNotMyCards={selectNotMyCards}
       />
       <section className='elements'>
         <ul className='elements__list'>
-          {
-            cards.map(function(card) {              
-              return (<Card 
-                card={card}
-                key={card._id}
-                handleCardClick={handleCardClick}
-                onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
-              />)
-            })
-          }
+          <Routes>
+            <Route path='/'
+              element={
+                cards.map(function(card) {              
+                  return (<Card 
+                    card={card}
+                    key={card._id}
+                    handleCardClick={handleCardClick}
+                    onCardLike={onCardLike}
+                    onCardDelete={onCardDelete}
+                  />)
+                })
+              }
+            />
+            <Route path='/mycards'
+              element={
+                myCards.map(function(card) {              
+                  return (<Card 
+                    card={card}
+                    key={card._id}
+                    handleCardClick={handleCardClick}
+                    onCardLike={onCardLike}
+                    onCardDelete={onCardDelete}
+                  />)
+                })
+              }
+            />
+            <Route path='/othercards'
+              element={
+                otherCards.map(function(card) {              
+                  return (<Card 
+                    card={card}
+                    key={card._id}
+                    handleCardClick={handleCardClick}
+                    onCardLike={onCardLike}
+                    onCardDelete={onCardDelete}
+                  />)
+                })
+              }
+            />  
+          </Routes>
         </ul>
       </section>
     </main>

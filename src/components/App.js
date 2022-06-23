@@ -12,7 +12,11 @@ import CurrentUserContext from '../context/CurrentUserContext';
 
 function App() {
   const [currentUser, setUser] =  useState({});
+
   const [currentCards, setCards] =  useState([]);
+  const [currentMyCards, setMyCards] =  useState([]);
+  const [currentOtherCards, setOtherCards] =  useState([]);
+
   const [isEditAvatarPopupOpen, setIsAvatarPopup] = useState(false);
   const [isEditProfilePopupOpen, setIsProfilePopup] = useState(false);
   const [isAddPlacePopupOpen, setIsPlacePopup] = useState(false);
@@ -25,6 +29,8 @@ function App() {
       .then(([user, items]) => {
         setUser(user);
         setCards(items);
+        setMyCards(items.filter(item => item.owner._id === user._id));
+        setOtherCards(items.filter(item => item.owner._id !== user._id));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -104,36 +110,20 @@ function App() {
     .finally(closeAllPopups);
   }
 
-  function selectAllCards() {
-    const allCards = currentCards;
-    console.log(allCards)
-  }
-
-  function selectMyCards() {
-    const myCards = currentCards.filter(card => card.owner._id === currentUser._id);
-    console.log(myCards)
-  }
-
-  function selectNotMyCards() {
-    const notMyCards = currentCards.filter(card => card.owner._id !== currentUser._id);
-    console.log(notMyCards)
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
         <div className='content'>
           <Header />
           <Main
             cards={currentCards}
+            myCards={currentMyCards}
+            otherCards={currentOtherCards}
             onEditAvatar={handleClickEditAvatar}
             onEditProfile={handleClickEditProfile}
             onAddPlace={handleClickAddPlace}
             onCardLike={handleCardLike}
             handleCardClick={handleCardClick}
             onCardDelete={handleClickDeleteCard}
-            selectAllCards={selectAllCards}
-            selectMyCards={selectMyCards}
-            selectNotMyCards={selectNotMyCards}
           />
           <Footer />
           <EditAvatarPopup 

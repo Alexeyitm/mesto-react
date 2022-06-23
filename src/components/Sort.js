@@ -1,9 +1,11 @@
-function Sort({ selectAllCards, selectMyCards, selectNotMyCards }) {
+import { NavLink } from "react-router-dom";
+
+function Sort() {
   return (
     <div className='sort'>
-      <button className='sort__button' onClick={selectAllCards}>Все</button>
-      <button className='sort__button' onClick={selectMyCards}>Мои</button>
-      <button className='sort__button' onClick={selectNotMyCards}>Чужие</button>
+      <NavLink className='sort__button' to='/'>Все</NavLink>
+      <NavLink className='sort__button' to='/mycards'>Мои</NavLink>
+      <NavLink className='sort__button' to='/othercards'>Не мои</NavLink>
     </div>
   );
 }

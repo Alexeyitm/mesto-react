@@ -7,6 +7,10 @@
   background-color: #000000;
   border: 2px solid #FFFFFF;
   color: #FFFFFF;
+  text-decoration: none;
+  text-align: center;
+  align-self: center;
+  line-height: 30px;
   cursor: pointer;
 }
 
