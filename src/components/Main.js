@@ -3,7 +3,19 @@ import Card from './Card.js';
 import Sort from './Sort';
 import CurrentUserContext from '../context/CurrentUserContext'
 
-function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardLike, handleCardClick, onCardDelete, setCards }) {
+function Main({ 
+  cards, 
+  onEditAvatar, 
+  onEditProfile, 
+  onAddPlace, 
+  onCardLike, 
+  handleCardClick, 
+  onCardDelete,
+  selectAllCards,
+  selectMyCards,
+  selectNotMyCards
+}) {
+
   const user = useContext(CurrentUserContext);
 
   return (
@@ -37,9 +49,10 @@ function Main({ cards, onEditAvatar, onEditProfile, onAddPlace, onCardLike, hand
           onClick={onAddPlace}
         ></button>
       </section>
-      <Sort 
-        cards={cards}
-        setCards={setCards}
+      <Sort
+        selectAllCards={selectAllCards}
+        selectMyCards={selectMyCards}
+        selectNotMyCards={selectNotMyCards}
       />
       <section className='elements'>
         <ul className='elements__list'>

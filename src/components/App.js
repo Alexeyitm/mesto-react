@@ -104,6 +104,21 @@ function App() {
     .finally(closeAllPopups);
   }
 
+  function selectAllCards() {
+    const allCards = currentCards;
+    console.log(allCards)
+  }
+
+  function selectMyCards() {
+    const myCards = currentCards.filter(card => card.owner._id === currentUser._id);
+    console.log(myCards)
+  }
+
+  function selectNotMyCards() {
+    const notMyCards = currentCards.filter(card => card.owner._id !== currentUser._id);
+    console.log(notMyCards)
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
         <div className='content'>
@@ -116,7 +131,9 @@ function App() {
             onCardLike={handleCardLike}
             handleCardClick={handleCardClick}
             onCardDelete={handleClickDeleteCard}
-            setCards={setCards}
+            selectAllCards={selectAllCards}
+            selectMyCards={selectMyCards}
+            selectNotMyCards={selectNotMyCards}
           />
           <Footer />
           <EditAvatarPopup 

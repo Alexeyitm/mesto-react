@@ -1,14 +1,9 @@
-import { useContext} from 'react';
-import CurrentUserContext from '../context/CurrentUserContext'
-
-function Sort({ cards, setCards }) {
-  const user = useContext(CurrentUserContext);
-
+function Sort({ selectAllCards, selectMyCards, selectNotMyCards }) {
   return (
     <div className='sort'>
-      <button className='sort__button'>Все</button>
-      <button className='sort__button'>Мои</button>
-      <button className='sort__button'>Чужие</button>
+      <button className='sort__button' onClick={selectAllCards}>Все</button>
+      <button className='sort__button' onClick={selectMyCards}>Мои</button>
+      <button className='sort__button' onClick={selectNotMyCards}>Чужие</button>
     </div>
   );
 }
