@@ -26,6 +26,7 @@
 /* Sort */
 @import url(./blocks/sort/sort.css);
 @import url(./blocks/sort/__button/sort__button.css);
+@import url(./blocks/sort/__button/_active/sort__button_active.css);
 
 /* Elements */
 @import url(./blocks/elements/elements.css);

@@ -1,11 +1,11 @@
-.sort__button {
+.sort__button_active {
   margin: 0;
   padding: 0;
   width: 100px;
   height: 30px;
   background-color: #000000;
-  border: 2px solid #FFFFFF;
-  color: #FFFFFF;
+  border: 2px solid #30D5C8;
+  color: #30D5C8;
   text-decoration: none;
   text-align: center;
   align-self: center;
@@ -13,12 +13,8 @@
   cursor: pointer;
 }
 
-.sort__button:hover {
-  opacity: .6;
-}
-
 @media screen and (max-width: 450px) {
-  .sort__button {
+  .sort__button_active {
     width: 80px;
   }
 }
