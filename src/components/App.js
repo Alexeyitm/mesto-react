@@ -11,6 +11,7 @@ import { api } from '../utils/Api';
 import CurrentUserContext from '../context/CurrentUserContext';
 
 function App() {
+  
   const [currentUser, setUser] =  useState({});
 
   const [currentCards, setCards] =  useState([]);

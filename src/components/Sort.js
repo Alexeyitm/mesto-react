@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 function Sort() {
+  
   return (
     <div className='sort'>
       <NavLink className={({ isActive }) => isActive ? 'sort__button_active' : 'sort__button'} to='/'>Все</NavLink>
