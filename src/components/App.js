@@ -70,6 +70,8 @@ function App() {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.toggleLike(card._id, isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setMyCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setOtherCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
     .catch((err) => console.log(err))
   }
@@ -95,7 +97,8 @@ function App() {
   function handleAddPlaceSubmit(card) {
     setIsSaving(true);
     api.setCard(card).then((newCard) => {
-      setCards([newCard, ...currentCards]); 
+      setCards([newCard, ...currentCards]);
+      setMyCards([newCard, ...currentMyCards]);
     })
     .catch((err) => console.log(err))
     .finally(closeAllPopups);
@@ -104,7 +107,9 @@ function App() {
   function handleCardDelete(card) {
     setIsSaving(true);
     api.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== card._id));   
+      setCards((state) => state.filter((c) => c._id !== card._id));
+      setMyCards((state) => state.filter((c) => c._id !== card._id)); 
+      setOtherCards((state) => state.filter((c) => c._id !== card._id)); 
     })
     .catch((err) => console.log(err))
     .finally(closeAllPopups);
