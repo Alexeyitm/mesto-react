@@ -36,7 +36,7 @@
 
 ## Посмотреть страницу и макет:
 
-* [Mesto-React в GitHub Pages](https://alexeyitm.github.io/mesto-react/)
+* [Mesto-React на GitHub Pages](https://alexeyitm.github.io/mesto-react/)
 * [Архитектура приложения на Google Slides](https://docs.google.com/presentation/d/1qafkh1eS4dydPVRSKkRlOU-TTRYEdYI9Dg_bXn960hU/edit#slide=id.p)
 * [Макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
